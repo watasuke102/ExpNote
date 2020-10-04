@@ -31,7 +31,37 @@ class _IventViewPageState extends State<IventViewPage>
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>
         [
-          Text('¥$_counter',style: Theme.of(context).textTheme.headline2)
+          Center(child: Text('¥$_counter',style: Theme.of(context).textTheme.headline2)),
+
+          Card(
+            child: Row
+            (
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>
+              [
+                Flexible(child: Column(children:<Widget>
+                [
+                  Text
+                  (
+                    'Very Very Very Very Very Very Long Text Yehhhhh Get Money',
+                    style   : Theme.of(context).textTheme.subtitle1,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                  )
+                ])),
+                // 収支額・表示
+                Column
+                (
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>
+                  [
+                    Text('+¥5000',     style: Theme.of(context).textTheme.headline3),
+                    Text('2020/10/21', style: Theme.of(context).textTheme.caption)
+                  ]
+                )
+              ]
+            )
+          )
         ],
       ),
       floatingActionButton: FloatingActionButton
