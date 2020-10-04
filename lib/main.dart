@@ -1,9 +1,10 @@
 /*
  * ExpNote - A simple household account book for Android
  *
+ * main.dart
  * 2020 Watasuke <watasuke102@gmail.com>
  */
-
+import 'pages.dart';
 import 'package:flutter/material.dart';
 
 const APP_NAME         = 'ExpNote';
@@ -43,11 +44,34 @@ class MainPage extends StatefulWidget
 //MainPageState
 class _MainPageState extends State<MainPage>
 {
-  int _counter = 0;
+  int _index   = 0;
 
-  void _incrementCounter()
+  PageController _controller;
+
+  @override void initState()
   {
-    setState( (){_counter+=500;} );
+    super.initState();
+    _controller = new PageController();
+  }
+  @override void dispose()
+  {
+    super.dispose();
+    _controller.dispose();
+  }
+
+  void _onPageChanged(int page)
+  {
+    setState( (){this._index = page;} );
+  }
+
+  void _onTapNavigation(int page)
+  {
+    _controller.animateToPage
+    (
+      page,
+      duration: const Duration(microseconds: 500),
+      curve: Curves.bounceOut
+    );
   }
 
   @override Widget build(BuildContext context)
@@ -55,25 +79,20 @@ class _MainPageState extends State<MainPage>
     return Scaffold
     (
       appBar: AppBar(title: Text(widget.title)),
-      body  : Center
+      body  : new PageView
       (
-        child: Column
-        (
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>
-          [
-            Text('¥$_counter',style: Theme.of(context).textTheme.headline2)
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton
-      (
-        onPressed: _incrementCounter,
-        tooltip  : 'Increment',
-        child    : Icon(Icons.add),
+        controller   : _controller,
+        onPageChanged: _onPageChanged,
+        children:
+        [
+          new IventViewPage(),
+          new CalanderPage()
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar
       (
+        currentIndex: _index,
+        onTap: _onTapNavigation,
         items:
         [
           BottomNavigationBarItem
