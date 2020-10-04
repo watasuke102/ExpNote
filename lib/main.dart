@@ -6,9 +6,9 @@
 
 import 'package:flutter/material.dart';
 
-const APP_NAME        = 'ExpNote';
-const VERSION         = 'v0.00';
-const NAME_AND_VERSION = APP_NAME+VERSION;
+const APP_NAME         = 'ExpNote';
+const VERSION          = 'v0.00';
+const NAME_AND_VERSION = APP_NAME+' - '+VERSION;
 
 void main() => runApp(MainApp());
 /*
