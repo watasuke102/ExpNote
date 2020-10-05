@@ -7,4 +7,4 @@ A simple household account book
 This is a simple household account book for Android.
 
 ## LICENSE
-MIT-SUSHI WARE License
+MIT SUSHI-WARE License

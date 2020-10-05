@@ -1,8 +1,11 @@
 /*
  * ExpNote - A simple household account book for Android
- *
  * pages.dart
- * 2020 Watasuke <watasuke102@gmail.com>
+ *
+ * CopyRight (c) 2020 Watasuke
+ * Email  : <watasuke102@gmail.com>
+ * Twitter: @Watasuke102
+ * This software is released under the MIT SUSHI-WARE License.
  */
 import 'package:flutter/material.dart';
 
