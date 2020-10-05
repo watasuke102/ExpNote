@@ -15,24 +15,28 @@ class _Data
   String title = 'Title';
   String date  = '1970/01/01';
   int    money = 0;
+  _Data(String t, String d, int m)
+  {
+    title = t;
+    date  = d;
+    money = m;
+  }
 }
 class _ExpDataList
 {
   int _sumOfMoney=0;
-  List<_Data> data;
+  List<_Data> data=[];
 
   _ExpDataList()
   {
+    print("[debbug] _ExpDataList initing...");
     for(int i=0; i<10; i++)
     {
-      data[i].date  = '2020/09/02';
-      data[i].title = 'hoge($i)';
-      data[i].money = i*25;
+      data.add(_Data('hoge($i)', '2020/09/02', i*25));
       _sumOfMoney += data[i].money;
     }
   }
   int    sumOfData() { return data.length;  }
-  int    sumOfMoney(){ return _sumOfMoney;  }
   int    money(int i){ return data[i].money;}
   String title(int i){ return data[i].title;}
   String date (int i){ return data[i].date ;}
@@ -63,52 +67,68 @@ class _IventViewPageState extends State<IventViewPage>
 
   @override Widget build(BuildContext context)
   {
-    return Scaffold
-    (
-      body: Column
+    expDataList = new _ExpDataList();
+    List<Card> cardList=[];
+    for(var i=0; i<expDataList.sumOfData(); i++)
+      cardList.add
       (
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>
-        [
-          Center(child: Text('¥$expDataList.sumOfMoney',style: Theme.of(context).textTheme.headline2)),
-          for(var i=0; i<expDataList.sumOfData(); i++)
-          {
-            Card(
-              child: Row
+        //-----------------------
+        // Card
+        //
+        Card
+        (child: Row
+          (
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>
+            [
+              Flexible(child: Column(children:<Widget>
+              [
+                Text
+                (
+                  expDataList.title(i),
+                  style   : Theme.of(context).textTheme.subtitle1,
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                )
+              ])),
+              // 収支額・表示
+              Column
               (
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>
                 [
-                  Flexible(child: Column(children:<Widget>
-                  [
-                    Text
-                    (
-                      'Very Very Very Very Very Very Long Text Yehhhhh Get Money',
-                      style   : Theme.of(context).textTheme.subtitle1,
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                    )
-                  ])),
-                  // 収支額・表示
-                  Column
-                  (
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: <Widget>
-                    [
-                      Text('+¥5000',     style: Theme.of(context).textTheme.headline3),
-                      Text('2020/10/21', style: Theme.of(context).textTheme.caption)
-                    ]
-                  )
+                  Text(expDataList.plusOrMinus(i)+"¥"+expDataList.money(i).toString(), style: Theme.of(context).textTheme.headline3),
+                  Text(expDataList.date(i), style: Theme.of(context).textTheme.caption)
                 ]
               )
-            )
-          }
-        ],
+            ]
+          ))
+      );
+
+    int sumOfMoney = expDataList._sumOfMoney;
+    return Scaffold
+    (
+      body: Padding
+      (
+        padding: EdgeInsets.all(25),
+
+        // Main Widgets
+        child: Column
+        (
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>
+          [
+            Center(child: Text('¥$sumOfMoney',style: Theme.of(context).textTheme.headline2)),
+            //ListView.builder(itemCount: cardList.length, itemBuilder: (context, index) { return cardList[index]; },)
+          ]
+        )
       ),
+
+      //Add ivent button
       floatingActionButton: FloatingActionButton
       (
         onPressed: _incrementCounter,
-        tooltip  : 'Increment',
+        tooltip  : 'Add',
         child    : Icon(Icons.add),
       ),
     );
