@@ -29,10 +29,10 @@ class _ExpDataList
 
   _ExpDataList()
   {
-    print("[debbug] _ExpDataList initing...");
-    for(int i=0; i<10; i++)
+    print("[debug] _ExpDataList initing...");
+    for(int i=0; i<1000; i++)
     {
-      data.add(_Data('hoge($i)', '2020/09/02', i*25));
+      data.add(_Data('hoge($i)', '2020/10/10', i*25));
       _sumOfMoney += data[i].money;
     }
   }
@@ -45,6 +45,37 @@ class _ExpDataList
     if(data[i].money>0)
       return "+";
     return "-";
+  }
+
+  Widget card(BuildContext context, int index)
+  {
+    return Container(child:Card(child: Row
+    (
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>
+        [
+          Flexible(child: Column(children:<Widget>
+          [
+            Text
+            (
+              title(index),
+              style   : Theme.of(context).textTheme.subtitle1,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+            )
+          ])),
+          // 収支額・表示
+          Column
+          (
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>
+            [
+              Text(plusOrMinus(index)+money(index).toString(), style: Theme.of(context).textTheme.headline3),
+              Text(date(index), style: Theme.of(context).textTheme.caption)
+            ]
+          )
+        ]
+      )));
   }
 }
 
@@ -68,61 +99,33 @@ class _IventViewPageState extends State<IventViewPage>
   @override Widget build(BuildContext context)
   {
     expDataList = new _ExpDataList();
-    List<Card> cardList=[];
-    for(var i=0; i<expDataList.sumOfData(); i++)
-      cardList.add
-      (
-        //-----------------------
-        // Card
-        //
-        Card
-        (child: Row
-          (
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>
-            [
-              Flexible(child: Column(children:<Widget>
-              [
-                Text
-                (
-                  expDataList.title(i),
-                  style   : Theme.of(context).textTheme.subtitle1,
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                )
-              ])),
-              // 収支額・表示
-              Column
-              (
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>
-                [
-                  Text(expDataList.plusOrMinus(i)+"¥"+expDataList.money(i).toString(), style: Theme.of(context).textTheme.headline3),
-                  Text(expDataList.date(i), style: Theme.of(context).textTheme.caption)
-                ]
-              )
-            ]
-          ))
-      );
 
     int sumOfMoney = expDataList._sumOfMoney;
     return Scaffold
     (
       body: Padding
       (
-        padding: EdgeInsets.all(25),
-
+        padding: EdgeInsets.all(10),
         // Main Widgets
+        /*
         child: Column
         (
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>
           [
             Center(child: Text('¥$sumOfMoney',style: Theme.of(context).textTheme.headline2)),
-            //ListView.builder(itemCount: cardList.length, itemBuilder: (context, index) { return cardList[index]; },)
-          ]
-        )
-      ),
+            */
+            //Container(child:Center(
+            child: ListView.builder
+            (
+              itemCount: expDataList.sumOfData(),
+              itemBuilder: (context, index)
+              {
+                return expDataList.card(context, index);
+              }
+            )
+          //))])
+          ),
 
       //Add ivent button
       floatingActionButton: FloatingActionButton
