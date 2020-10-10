@@ -107,15 +107,15 @@ class _IventViewPageState extends State<IventViewPage>
       (
         padding: EdgeInsets.all(10),
         // Main Widgets
-        /* */
+        /*
         child: Column
         (
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>
           [
             Center(child: Text('¥'+expDataList.sumOfMoney(),style: Theme.of(context).textTheme.headline2)),
-            /*
-            Container(child:Center(
+            */
+            //Container(child:Center(
             child: ListView.builder
             (
               itemCount: expDataList.sumOfData(),
@@ -124,7 +124,7 @@ class _IventViewPageState extends State<IventViewPage>
                 return expDataList.card(context, index);
               }
             )
-          ))])*/])
+          //))])])
           ),
 
       //Add ivent button

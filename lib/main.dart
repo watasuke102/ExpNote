@@ -81,7 +81,19 @@ class _MainPageState extends State<MainPage>
   {
     return Scaffold
     (
-      appBar: AppBar(title: Text(widget.title)),
+      appBar: AppBar
+      (
+        title: Text(widget.title),
+        actions:
+        [
+          IconButton
+          (
+            onPressed: null,
+            tooltip: 'Settings',
+            icon: Icon(Icons.settings)
+          )
+        ]
+      ),
       body  : new PageView
       (
         controller   : _controller,
