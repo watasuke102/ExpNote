@@ -117,20 +117,48 @@ class _IventViewPageState extends State<IventViewPage>
               }
             ))
           ]
-            )
-          ),
+        )
+      ),
 
       //Add ivent button
       floatingActionButton: FloatingActionButton
       (
-        onPressed: _incrementCounter,
         tooltip  : 'Add',
         child    : Icon(Icons.add),
+        onPressed: ()
+        {
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>AddIventsPage()));
+        }
       ),
     );
   }
 }
 
+// Add Ivents Page
+class AddIventsPage extends StatefulWidget
+{
+  final String title;
+  AddIventsPage( {Key key, this.title} ) : super(key: key);
+  @override _AddIventsPageState createState() => _AddIventsPageState();
+}
+class _AddIventsPageState extends State<AddIventsPage>
+{
+  @override Widget build(BuildContext context)
+  {
+    return Scaffold
+    (
+      appBar: AppBar
+      (
+        title: Text("Add Ivent"),
+      ),
+      body: Padding
+      (
+        padding: EdgeInsets.all(10),
+        child: Text("Add Ivent"),
+      )
+    );
+  }
+}
 
 // Calander View Page
 class CalanderPage extends StatefulWidget
@@ -162,17 +190,17 @@ class _CalanderPageState extends State<CalanderPage>
       (
         padding: EdgeInsets.all(15),
         child: Column
-      (
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>
-        [
+        (
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>
+          [
             Text('hogehoge'),
             TableCalendar
             (
               calendarController: _calendarController,
             )
-        ],
-      )
+          ],
+        )
       )
     );
   }
