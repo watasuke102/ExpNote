@@ -42,9 +42,9 @@ class _ExpDataList
   String date (int i){ return data[i].date ;}
   String plusOrMinus(int i)
   {
-    if(data[i].money>0)
-      return "+";
-    return "-";
+    if(data[i].money<0)
+      return "-";
+    return "+";
   }
 
   Widget card(BuildContext context, int index)
