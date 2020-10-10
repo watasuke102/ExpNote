@@ -94,7 +94,7 @@ class _MainPageState extends State<MainPage>
           )
         ]
       ),
-      body  : new PageView
+      body: new PageView
       (
         controller   : _controller,
         onPageChanged: _onPageChanged,

@@ -9,6 +9,7 @@
  */
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 //タイトル・日付，変動金額を記録するもの
 class _Data
@@ -90,41 +91,33 @@ class IventViewPage extends StatefulWidget
 //IventViewPageState
 class _IventViewPageState extends State<IventViewPage>
 {
-  _ExpDataList expDataList;
-  int _counter = 0;
-
-  void _incrementCounter()
-  {
-    setState( (){_counter+=500;} );
-  }
-
+  _ExpDataList expDataList=new _ExpDataList();
   @override Widget build(BuildContext context)
   {
-    expDataList = new _ExpDataList();
+    //expDataList = new _ExpDataList();
     return Scaffold
     (
       body: Padding
       (
         padding: EdgeInsets.all(10),
         // Main Widgets
-        /*
         child: Column
         (
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>
           [
             Center(child: Text('¥'+expDataList.sumOfMoney(),style: Theme.of(context).textTheme.headline2)),
-            */
             //Container(child:Center(
-            child: ListView.builder
+            Flexible(child: ListView.builder
             (
               itemCount: expDataList.sumOfData(),
               itemBuilder: (context, index)
               {
                 return expDataList.card(context, index);
               }
+            ))
+          ]
             )
-          //))])])
           ),
 
       //Add ivent button
@@ -149,17 +142,37 @@ class CalanderPage extends StatefulWidget
 //CalanderPageState
 class _CalanderPageState extends State<CalanderPage>
 {
+  CalendarController _calendarController;
+  @override
+  void initState() {
+    super.initState();
+    _calendarController = CalendarController();
+  }
+
+  @override
+  void dispose() {
+    _calendarController.dispose();
+    super.dispose();
+  }
   @override Widget build(BuildContext context)
   {
     return Scaffold
     (
-      body: Column
+      body: Padding
+      (
+        padding: EdgeInsets.all(15),
+        child: Column
       (
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>
         [
-          Text('hogehoge')
+            Text('hogehoge'),
+            TableCalendar
+            (
+              calendarController: _calendarController,
+            )
         ],
+      )
       )
     );
   }
