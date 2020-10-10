@@ -8,6 +8,7 @@
  * This software is released under the MIT SUSHI-WARE License.
  */
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 //タイトル・日付，変動金額を記録するもの
 class _Data
@@ -38,6 +39,7 @@ class _ExpDataList
   }
   int    sumOfData() { return data.length;  }
   int    money(int i){ return data[i].money;}
+  String sumOfMoney(){ return NumberFormat("#,###").format(_sumOfMoney);}
   String title(int i){ return data[i].title;}
   String date (int i){ return data[i].date ;}
   String plusOrMinus(int i)
@@ -99,23 +101,21 @@ class _IventViewPageState extends State<IventViewPage>
   @override Widget build(BuildContext context)
   {
     expDataList = new _ExpDataList();
-
-    int sumOfMoney = expDataList._sumOfMoney;
     return Scaffold
     (
       body: Padding
       (
         padding: EdgeInsets.all(10),
         // Main Widgets
-        /*
+        /* */
         child: Column
         (
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>
           [
-            Center(child: Text('¥$sumOfMoney',style: Theme.of(context).textTheme.headline2)),
-            */
-            //Container(child:Center(
+            Center(child: Text('¥'+expDataList.sumOfMoney(),style: Theme.of(context).textTheme.headline2)),
+            /*
+            Container(child:Center(
             child: ListView.builder
             (
               itemCount: expDataList.sumOfData(),
@@ -124,7 +124,7 @@ class _IventViewPageState extends State<IventViewPage>
                 return expDataList.card(context, index);
               }
             )
-          //))])
+          ))])*/])
           ),
 
       //Add ivent button
