@@ -14,10 +14,10 @@ import 'addIventsPage.dart';
 //タイトル・日付，変動金額を記録するもの
 class _Data
 {
-  String title = 'Title';
-  String date  = '1970/01/01';
-  int    money = 0;
-  _Data(String t, String d, int m)
+  DateTime date  = DateTime(1970, 1, 1);
+  String   title = 'Title';
+  int      money = 0;
+  _Data(String t, int m, DateTime d)
   {
     title = t;
     date  = d;
@@ -35,16 +35,22 @@ class _ExpDataList
     print("[debug] _ExpDataList initing...");
     for(int i=0; i<1000; i++)
     {
-      data.add(_Data('hoge($i)', '2020/10/10', i*25));
+      data.add(_Data('hoge($i)', i*25, DateTime.now()));
       _sumOfMoney += data[i].money;
     }
   }
-  int    sumOfData() { return data.length;  }
-  int    money(int i){ return data[i].money;}
-  String sumOfMoney(){ return NumberFormat("#,###").format(_sumOfMoney);}
-  String title(int i){ return data[i].title;}
-  String date (int i){ return data[i].date ;}
-  String plusOrMinus(int i)
+  int      sumOfData() { return data.length;  }
+  String   sumOfMoney(){ return NumberFormat("#,###").format(_sumOfMoney);}
+
+  int      money(int i)    { return data[i].money;}
+  String   title(int i)    { return data[i].title;}
+  DateTime date (int i)    { return data[i].date ;}
+  String   str_date(int i)
+  {
+    DateFormat fmt = DateFormat('yyyy/MM/dd');
+    return fmt.format(data[i].date);
+  }
+  String   plusOrMinus(int i)
   {
     if(data[i].money<0)
       return "-";
@@ -75,7 +81,7 @@ class _ExpDataList
           children: <Widget>
           [
             Text(plusOrMinus(index)+money(index).toString(), style: Theme.of(context).textTheme.headline3),
-            Text(date(index), style: Theme.of(context).textTheme.caption)
+            Text(str_date(index), style: Theme.of(context).textTheme.caption)
           ]
         )
       ]
