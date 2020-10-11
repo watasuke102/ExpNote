@@ -1,6 +1,6 @@
 /*
  * ExpNote - A simple household account book for Android
- * pages.dart
+ * iventViewPage.dart
  *
  * CopyRight (c) 2020 Watasuke
  * Email  : <watasuke102@gmail.com>
@@ -9,7 +9,7 @@
  */
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:table_calendar/table_calendar.dart';
+import 'addIventsPage.dart';
 
 //タイトル・日付，変動金額を記録するもの
 class _Data
@@ -24,6 +24,7 @@ class _Data
     money = m;
   }
 }
+
 class _ExpDataList
 {
   int _sumOfMoney=0;
@@ -54,33 +55,34 @@ class _ExpDataList
   {
     return Container(child:Card(child: Row
     (
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>
+      [
+        Flexible(child: Column(children:<Widget>
         [
-          Flexible(child: Column(children:<Widget>
-          [
-            Text
-            (
-              title(index),
-              style   : Theme.of(context).textTheme.subtitle1,
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
-            )
-          ])),
-          // 収支額・表示
-          Column
+          Text
           (
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: <Widget>
-            [
-              Text(plusOrMinus(index)+money(index).toString(), style: Theme.of(context).textTheme.headline3),
-              Text(date(index), style: Theme.of(context).textTheme.caption)
-            ]
+            title(index),
+            style   : Theme.of(context).textTheme.subtitle1,
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
           )
-        ]
-      )));
+        ])),
+        // 収支額・表示
+        Column
+        (
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: <Widget>
+          [
+            Text(plusOrMinus(index)+money(index).toString(), style: Theme.of(context).textTheme.headline3),
+            Text(date(index), style: Theme.of(context).textTheme.caption)
+          ]
+        )
+      ]
+    )));
   }
 }
+
 
 class IventViewPage extends StatefulWidget
 {
@@ -88,6 +90,7 @@ class IventViewPage extends StatefulWidget
   IventViewPage( {Key key, this.title} ) : super(key: key);
   @override _IventViewPageState createState() => _IventViewPageState();
 }
+
 //IventViewPageState
 class _IventViewPageState extends State<IventViewPage>
 {
@@ -130,78 +133,6 @@ class _IventViewPageState extends State<IventViewPage>
           Navigator.push(context, MaterialPageRoute(builder: (context)=>AddIventsPage()));
         }
       ),
-    );
-  }
-}
-
-// Add Ivents Page
-class AddIventsPage extends StatefulWidget
-{
-  final String title;
-  AddIventsPage( {Key key, this.title} ) : super(key: key);
-  @override _AddIventsPageState createState() => _AddIventsPageState();
-}
-class _AddIventsPageState extends State<AddIventsPage>
-{
-  @override Widget build(BuildContext context)
-  {
-    return Scaffold
-    (
-      appBar: AppBar
-      (
-        title: Text("Add Ivent"),
-      ),
-      body: Padding
-      (
-        padding: EdgeInsets.all(10),
-        child: Text("Add Ivent"),
-      )
-    );
-  }
-}
-
-// Calander View Page
-class CalanderPage extends StatefulWidget
-{
-  final String title;
-  CalanderPage( {Key key, this.title} ) : super(key: key);
-  @override _CalanderPageState createState() => _CalanderPageState();
-}
-//CalanderPageState
-class _CalanderPageState extends State<CalanderPage>
-{
-  CalendarController _calendarController;
-  @override
-  void initState() {
-    super.initState();
-    _calendarController = CalendarController();
-  }
-
-  @override
-  void dispose() {
-    _calendarController.dispose();
-    super.dispose();
-  }
-  @override Widget build(BuildContext context)
-  {
-    return Scaffold
-    (
-      body: Padding
-      (
-        padding: EdgeInsets.all(15),
-        child: Column
-        (
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>
-          [
-            Text('hogehoge'),
-            TableCalendar
-            (
-              calendarController: _calendarController,
-            )
-          ],
-        )
-      )
     );
   }
 }
