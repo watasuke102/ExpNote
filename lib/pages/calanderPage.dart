@@ -9,6 +9,7 @@
  */
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import '../expDataList.dart';
 
 // Calander View Page
 class CalanderPage extends StatefulWidget
@@ -22,6 +23,8 @@ class CalanderPage extends StatefulWidget
 class _CalanderPageState extends State<CalanderPage>
 {
   CalendarController _calendarController;
+  //List<_Data> todaysIvents;
+
   @override
   void initState() {
     super.initState();
@@ -50,7 +53,22 @@ class _CalanderPageState extends State<CalanderPage>
             TableCalendar
             (
               calendarController: _calendarController,
-            )
+              rowHeight: 60,
+              calendarStyle: CalendarStyle
+              (
+                selectedColor: Theme.of(context).accentColor,
+                todayColor: Color.fromARGB(128, 64, 64, 64),
+              ),
+            ),
+            Flexible(child: ListView.builder
+            (
+              itemCount: expDataList.sumOfData(),
+              itemBuilder: (context, index)
+              {
+                return expDataList
+                  .getEventsOfAnyDay(_calendarController.focusedDay).card(context, index);
+              }
+            ))
           ],
         )
       )
