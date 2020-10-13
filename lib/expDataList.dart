@@ -32,18 +32,12 @@ class _ExpDataList
   _ExpDataList()
   {
     print("[debug] _ExpDataList initing...");
-    for(int i=0; i<1000; i++)
+    for(int i=0; i<60; i++)
     {
-      data.add(_Data('hoge($i)', i*25, DateTime.now()));
+      data.add(_Data('Ivent $i', i*10, DateTime(2020,10,i~/2)));
       _sumOfMoney += data[i].money;
     }
   }
-  //void init(List<_Data> d)
-  //{
-  //  data.clear();
-  //  for (var i in d)
-  //    data.add(_Data(i.title, i.money, i.date));
-  //}
 
   int      sumOfData() { return data.length;  }
   String   sumOfMoney(){ return NumberFormat("#,###").format(_sumOfMoney);}
@@ -64,7 +58,7 @@ class _ExpDataList
       return "-";
     return "+";
   }
-
+  void init(List<_Data> d) { data=d; }
   _ExpDataList getEventsOfAnyDay(DateTime tmp)
   {
     DateFormat fmt = DateFormat('yyyy/MM/dd');
@@ -76,43 +70,44 @@ class _ExpDataList
         list.add(i);
     }
     _ExpDataList dataList=_ExpDataList();
-    dataList.data.clear();
-    for (var i in list)
-      dataList.data.add(_Data(i.title, i.money, i.date));
-    //dataList.init(list);
+    dataList.init(list);
     return dataList;
   }
 
   Widget card(BuildContext context, int index)
   {
-    return Container(child:Card(child: Row
+    return Container(child:Card(child:Padding
     (
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>
-      [
-        Flexible(child: Column(children:<Widget>
+      padding: EdgeInsets.only(left: 8,right: 5),
+      child: Row
+      (
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>
         [
-          Text
-          (
-            title(index),
-            style   : Theme.of(context).textTheme.subtitle1,
-            maxLines: 3,
-            overflow: TextOverflow.ellipsis,
-          )
-        ])),
-        // 収支額・表示
-        Column
-        (
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>
+          Flexible(child: Column(children:<Widget>
           [
-            Text(plusOrMinus(index)+money(index).toString(), style: Theme.of(context).textTheme.headline3),
-            Text(str_date(index), style: Theme.of(context).textTheme.caption)
-          ]
-        )
-      ]
-    )));
+            Text
+            (
+              title(index),
+              style   : Theme.of(context).textTheme.subtitle1,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+            )
+          ])),
+          // 収支額・表示
+          Column
+          (
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>
+            [
+              Text(plusOrMinus(index)+money(index).toString(), style: Theme.of(context).textTheme.headline3),
+              Text(str_date(index), style: Theme.of(context).textTheme.caption)
+            ]
+          )
+        ]
+      )))
+    );
   }
 }
 // This is very very bad (?) global class :(
-_ExpDataList expDataList=new _ExpDataList();
+_ExpDataList expDataList = _ExpDataList();

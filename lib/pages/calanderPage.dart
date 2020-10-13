@@ -59,10 +59,14 @@ class _CalanderPageState extends State<CalanderPage>
                 selectedColor: Theme.of(context).accentColor,
                 todayColor: Color.fromARGB(128, 64, 64, 64),
               ),
+              onDaySelected: (day, events)
+              {
+                setState(() {});
+              },
             ),
             Flexible(child: ListView.builder
             (
-              itemCount: expDataList.sumOfData(),
+              itemCount: 2,//expDataList.getEventsOfAnyDay(_calendarController.focusedDay).sumOfData(),
               itemBuilder: (context, index)
               {
                 return expDataList
