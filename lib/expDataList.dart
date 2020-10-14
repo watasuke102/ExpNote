@@ -11,12 +11,12 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 //タイトル・日付，変動金額を記録するもの
-class _Data
+class ExpData
 {
   DateTime date  = DateTime(1970, 1, 1);
   String   title = 'Title';
   int      money = 0;
-  _Data(String t, int m, DateTime d)
+  ExpData(String t, int m, DateTime d)
   {
     title = t;
     date  = d;
@@ -24,52 +24,52 @@ class _Data
   }
 }
 
-class _ExpDataList
+class ExpDataList
 {
   int _sumOfMoney=0;
-  List<_Data> data=[];
+  List<ExpData> _data=[];
 
-  _ExpDataList()
+  ExpDataList()
   {
-    print("[debug] _ExpDataList initing...");
+    print("[debug] ExpDataList initing...");
     for(int i=0; i<60; i++)
     {
-      data.add(_Data('Ivent $i', i*10, DateTime(2020,10,i~/2)));
-      _sumOfMoney += data[i].money;
+      _data.add(ExpData('Ivent $i', i*10, DateTime(2020,10,i~/2)));
+      _sumOfMoney += _data[i].money;
     }
   }
 
-  int      sumOfData() { return data.length;  }
+  int      sumOfData() { return _data.length;  }
   String   sumOfMoney(){ return NumberFormat("#,###").format(_sumOfMoney);}
 
-  int      money(int i)    { return data[i].money;}
-  String   title(int i)    { return data[i].title;}
-  DateTime date (int i)    { return data[i].date ;}
+  int      money(int i)    { return _data[i].money;}
+  String   title(int i)    { return _data[i].title;}
+  DateTime date (int i)    { return _data[i].date ;}
 
-  String   str_date(int i)
+  String   dateString(int i)
   {
     DateFormat fmt = DateFormat('yyyy/MM/dd');
-    return fmt.format(data[i].date);
+    return fmt.format(_data[i].date);
   }
 
   String   plusOrMinus(int i)
   {
-    if(data[i].money<0)
+    if(_data[i].money<0)
       return "-";
     return "+";
   }
-  void init(List<_Data> d) { data=d; }
-  _ExpDataList getEventsOfAnyDay(DateTime tmp)
+  void init(List<ExpData> d) { _data=d; }
+  ExpDataList getEventsOfAnyDay(DateTime tmp)
   {
     DateFormat fmt = DateFormat('yyyy/MM/dd');
     var date=fmt.format(tmp);
-    List<_Data> list=[];
-    for (var i in data)
+    List<ExpData> list=[];
+    for (var i in _data)
     {
       if(date == fmt.format(i.date))
         list.add(i);
     }
-    _ExpDataList dataList=_ExpDataList();
+    ExpDataList dataList=ExpDataList();
     dataList.init(list);
     return dataList;
   }
@@ -101,7 +101,7 @@ class _ExpDataList
             children: <Widget>
             [
               Text(plusOrMinus(index)+money(index).toString(), style: Theme.of(context).textTheme.headline3),
-              Text(str_date(index), style: Theme.of(context).textTheme.caption)
+              Text(dateString(index), style: Theme.of(context).textTheme.caption)
             ]
           )
         ]
@@ -110,4 +110,4 @@ class _ExpDataList
   }
 }
 // This is very very bad (?) global class :(
-_ExpDataList expDataList = _ExpDataList();
+ExpDataList expDataList;

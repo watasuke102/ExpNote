@@ -23,7 +23,7 @@ class _IventViewPageState extends State<IventViewPage>
 {
   @override Widget build(BuildContext context)
   {
-    //expDataList = new _ExpDataList();
+    expDataList = ExpDataList();
     return Scaffold
     (
       body: Padding
