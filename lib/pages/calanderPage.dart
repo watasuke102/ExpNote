@@ -23,7 +23,7 @@ class CalanderPage extends StatefulWidget
 class _CalanderPageState extends State<CalanderPage>
 {
   CalendarController _calendarController;
-  //List<_Data> todaysIvents;
+  ExpDataList todaysIvents;
 
   @override
   void initState() {
@@ -39,6 +39,8 @@ class _CalanderPageState extends State<CalanderPage>
 
   @override Widget build(BuildContext context)
   {
+    //selectedDayがNullならDateTime.now()の値を使う
+    todaysIvents = ExpDataList.data(expDataList.getEventsOfAnyDay(_calendarController.selectedDay ?? DateTime.now()));
     return Scaffold
     (
       body: Padding
@@ -61,16 +63,18 @@ class _CalanderPageState extends State<CalanderPage>
               ),
               onDaySelected: (day, events)
               {
-                setState(() {});
+                setState(()
+                {
+                  todaysIvents = ExpDataList.data(expDataList.getEventsOfAnyDay(_calendarController.selectedDay));
+                });
               },
             ),
             Flexible(child: ListView.builder
             (
-              itemCount: 2,//expDataList.getEventsOfAnyDay(_calendarController.focusedDay).sumOfData(),
+              itemCount: todaysIvents.sumOfData(),
               itemBuilder: (context, index)
               {
-                return expDataList
-                  .getEventsOfAnyDay(_calendarController.focusedDay).card(context, index);
+                return todaysIvents.card(context, index);
               }
             ))
           ],

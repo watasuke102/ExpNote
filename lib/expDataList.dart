@@ -29,15 +29,22 @@ class ExpDataList
   int _sumOfMoney=0;
   List<ExpData> _data=[];
 
+  ExpDataList.data(this._data);
   ExpDataList()
   {
     print("[debug] ExpDataList initing...");
-    for(int i=0; i<60; i++)
+    for(int i=0; i<90; i++)
     {
-      _data.add(ExpData('Ivent $i', i*10, DateTime(2020,10,i~/2)));
+      _data.add(ExpData('Ivent $i', i*10, DateTime(2020,10,i~/3)));
       _sumOfMoney += _data[i].money;
     }
   }
+  void clear()
+  {
+    _sumOfMoney = 0;
+    _data.clear();
+  }
+
 
   int      sumOfData() { return _data.length;  }
   String   sumOfMoney(){ return NumberFormat("#,###").format(_sumOfMoney);}
@@ -58,8 +65,8 @@ class ExpDataList
       return "-";
     return "+";
   }
-  void init(List<ExpData> d) { _data=d; }
-  ExpDataList getEventsOfAnyDay(DateTime tmp)
+
+  List<ExpData> getEventsOfAnyDay(DateTime tmp)
   {
     DateFormat fmt = DateFormat('yyyy/MM/dd');
     var date=fmt.format(tmp);
@@ -69,10 +76,9 @@ class ExpDataList
       if(date == fmt.format(i.date))
         list.add(i);
     }
-    ExpDataList dataList=ExpDataList();
-    dataList.init(list);
-    return dataList;
+    return list;
   }
+
 
   Widget card(BuildContext context, int index)
   {
