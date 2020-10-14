@@ -40,7 +40,7 @@ class ExpDataList
     _sumOfMoney = 0;
     _data.clear();
   }
-  void add(ExpData d){ _data.add(d); }
+  void add(ExpData d){ _data.add(d); _sumOfMoney+=d.money;}
 
 
   int      sumOfData() { return _data.length;  }
@@ -59,7 +59,7 @@ class ExpDataList
   String   plusOrMinus(int i)
   {
     if(_data[i].money<0)
-      return "-";
+      return "";
     return "+";
   }
 
