@@ -40,7 +40,12 @@ class ExpDataList
     _sumOfMoney = 0;
     _data.clear();
   }
-  void add(ExpData d){ _data.add(d); _sumOfMoney+=d.money;}
+  void add(ExpData d)
+  {
+    _data.add(d);
+    _sumOfMoney+=d.money;
+    _data.sort((a,b)=>b.date.compareTo(a.date));
+  }
 
 
   int      sumOfData() { return _data.length;  }
