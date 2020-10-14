@@ -51,7 +51,6 @@ class _CalanderPageState extends State<CalanderPage>
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>
           [
-            Text('hogehoge'),
             TableCalendar
             (
               calendarController: _calendarController,
