@@ -13,10 +13,11 @@ import 'package:intl/intl.dart';
 //タイトル・日付，変動金額を記録するもの
 class ExpData
 {
-  DateTime date  = DateTime(1970, 1, 1);
+  DateTime date  = DateTime.now();
   String   title = 'Title';
   int      money = 0;
-  ExpData(String t, int m, DateTime d)
+  ExpData(){}
+  ExpData.init(String t, int m, DateTime d)
   {
     title = t;
     date  = d;
@@ -33,17 +34,13 @@ class ExpDataList
   ExpDataList()
   {
     print("[debug] ExpDataList initing...");
-    for(int i=0; i<90; i++)
-    {
-      _data.add(ExpData('Ivent $i', i*10, DateTime(2020,10,i~/3)));
-      _sumOfMoney += _data[i].money;
-    }
   }
   void clear()
   {
     _sumOfMoney = 0;
     _data.clear();
   }
+  void add(ExpData d){ _data.add(d); }
 
 
   int      sumOfData() { return _data.length;  }

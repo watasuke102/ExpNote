@@ -10,6 +10,7 @@
 import 'package:flutter/material.dart';
 import 'iventViewPage.dart';
 import 'calanderPage.dart';
+import '../expDataList.dart';
 
 //MainPage
 class MainPage extends StatefulWidget
@@ -32,6 +33,7 @@ class _MainPageState extends State<MainPage>
   {
     super.initState();
     _controller = new PageController();
+    setState(() { expDataList = ExpDataList(); });
   }
   @override void dispose()
   {

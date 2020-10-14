@@ -23,7 +23,6 @@ class _IventViewPageState extends State<IventViewPage>
 {
   @override Widget build(BuildContext context)
   {
-    expDataList = ExpDataList();
     return Scaffold
     (
       body: Padding
@@ -54,9 +53,10 @@ class _IventViewPageState extends State<IventViewPage>
       (
         tooltip  : 'Add',
         child    : Icon(Icons.add),
-        onPressed: ()
+        onPressed: () async
         {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>AddIventsPage()));
+          await Navigator.push(context, MaterialPageRoute(builder: (context)=>AddIventsPage()));
+          setState(() {});
         }
       ),
     );
