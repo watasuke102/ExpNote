@@ -24,6 +24,17 @@ class _AddIventsPageState extends State<AddIventsPage>
   ExpData enteredData = ExpData();
   DateFormat fmt = DateFormat('yyyy/MM/dd');
 
+  InputDecoration titleField, moneyField;
+
+  @override void initState()
+  {
+    super.initState();
+    titleField = InputDecoration(labelText: "タイトル*");
+    moneyField = InputDecoration(labelText: "金額*");
+    enteredData.title=null;
+    enteredData.money=null;
+  }
+
   Future<void> selectDate(BuildContext context) async
   {
     final DateTime date=await showDatePicker
@@ -38,6 +49,27 @@ class _AddIventsPageState extends State<AddIventsPage>
 
   void done()
   {
+    bool failed=false;
+    if(enteredData.title == null)
+    {
+      failed=true;
+      setState(()
+      {
+        titleField = InputDecoration(labelText: "タイトル*", errorText: "必須項目です");
+      });
+    }
+    else titleField = InputDecoration(labelText: "タイトル*");
+    if(enteredData.money == null)
+    {
+      failed=true;
+      setState(()
+      {
+        moneyField = InputDecoration(labelText: "金額*", errorText: "必須項目です");
+      });
+    }
+    else moneyField = InputDecoration(labelText: "金額*");
+
+    if(failed) return;
     expDataList.add(enteredData);
     Navigator.pop(context, false);
   }
@@ -77,18 +109,30 @@ class _AddIventsPageState extends State<AddIventsPage>
                 )
               ]
             ),
+
+            // タイトル
             TextField
             (
-              decoration: InputDecoration(labelText: "タイトル", hintText: "Title"),
+              decoration: titleField,
               maxLines: null,
               onChanged: (value) { setState(() { enteredData.title=value; }); }
             ),
+
+            // 金額
             TextField
             (
-              decoration: InputDecoration(labelText: "金額"),
+              decoration: moneyField,
               keyboardType: TextInputType.number,
               onChanged: (value) { setState(() { enteredData.money = int.parse(value); }); }
-            )
+            ),
+
+            // 詳細
+            TextField
+            (
+              decoration: InputDecoration(labelText: "詳細・メモ", hintText: "\n\n\n", hintMaxLines: 5),
+              maxLines: null,
+              onChanged: (value) { setState(() { enteredData.description=value; }); }
+            ),
           ]
         )
       )
