@@ -74,6 +74,7 @@ class ExpDataList
 
   void add(ExpData d)
   {
+    d.createDate=DateTime.now();
     _data.add(d);
     _sumOfMoney += d.money;
     _data.sort((a, b) => b.date.compareTo(a.date));

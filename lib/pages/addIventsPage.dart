@@ -74,6 +74,20 @@ class _AddIventsPageState extends State<AddIventsPage>
     Navigator.pop(context, false);
   }
 
+  Widget dialog(BuildContext context)
+  {
+    return AlertDialog
+    (
+      title: Text("警告", style: Theme.of(context).textTheme.headline5),
+      content: Text("変更は破棄されます。\n本当に前の画面に戻りますか？"),
+      actions:
+      [
+        FlatButton(onPressed:(){ Navigator.pop(context,false); }, child: Text("キャンセル")),
+        FlatButton(onPressed:(){ Navigator.pop(context,true ); }, child: Text("OK"))
+      ],
+    );
+  }
+
   @override Widget build(BuildContext context)
   {
     return Scaffold
@@ -87,53 +101,69 @@ class _AddIventsPageState extends State<AddIventsPage>
         ],
       ),
 
-      body: Padding
+      body: WillPopScope
       (
-        padding: EdgeInsets.all(10),
-        child: Column
+        onWillPop:() async
+        {
+          //なにか入力されていたらダイアログ表示
+          if
+          (
+            enteredData.title       != null ||
+            enteredData.money       != null ||
+            enteredData.description != ""
+          )
+            return showDialog<bool>(context: context, builder: (context) => dialog(context))?? false;
+
+          return true;
+        },
+        child: Padding
         (
-          children: <Widget>
-          [
-            Row
-            (
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children:
-              [
-                Text(fmt.format(enteredData.date), style: Theme.of(context).textTheme.headline5),
-                FlatButton.icon
-                (
-                  color: Colors.lightBlue,
-                  icon: Icon(Icons.calendar_today),
-                  label: Text("変更"),
-                  onPressed: () async => selectDate(context)
-                )
-              ]
-            ),
+          padding: EdgeInsets.all(10),
+          child: Column
+          (
+            children: <Widget>
+            [
+              Row
+              (
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children:
+                [
+                  Text(fmt.format(enteredData.date), style: Theme.of(context).textTheme.headline5),
+                  FlatButton.icon
+                  (
+                    color: Colors.lightBlue,
+                    icon: Icon(Icons.calendar_today),
+                    label: Text("変更"),
+                    onPressed: () async => selectDate(context)
+                  )
+                ]
+              ),
 
-            // タイトル
-            TextField
-            (
-              decoration: titleField,
-              maxLines: null,
-              onChanged: (value) { setState(() { enteredData.title=value; }); }
-            ),
+              // タイトル
+              TextField
+              (
+                decoration: titleField,
+                maxLines: null,
+                onChanged: (value) { setState(() { enteredData.title=value; }); }
+              ),
 
-            // 金額
-            TextField
-            (
-              decoration: moneyField,
-              keyboardType: TextInputType.number,
-              onChanged: (value) { setState(() { enteredData.money = int.parse(value); }); }
-            ),
+              // 金額
+              TextField
+              (
+                decoration: moneyField,
+                keyboardType: TextInputType.number,
+                onChanged: (value) { setState(() { enteredData.money = int.parse(value); }); }
+              ),
 
-            // 詳細
-            TextField
-            (
-              decoration: InputDecoration(labelText: "詳細・メモ", hintText: "\n\n\n", hintMaxLines: 5),
-              maxLines: null,
-              onChanged: (value) { setState(() { enteredData.description=value; }); }
-            ),
-          ]
+              // 詳細
+              TextField
+              (
+                decoration: InputDecoration(labelText: "詳細・メモ", hintText: "\n\n\n", hintMaxLines: 5),
+                maxLines: null,
+                onChanged: (value) { setState(() { enteredData.description=value; }); }
+              ),
+            ]
+          )
         )
       )
     );
