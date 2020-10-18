@@ -9,6 +9,7 @@
  */
 import 'package:flutter/material.dart';
 import 'addIventsPage.dart';
+import 'iventDetailPage.dart';
 import '../expDataList.dart';
 
 class IventViewPage extends StatefulWidget
@@ -41,7 +42,15 @@ class _IventViewPageState extends State<IventViewPage>
               itemCount: expDataList.sumOfData(),
               itemBuilder: (context, index)
               {
-                return expDataList.card(context, index);
+                return InkWell
+                (
+                  onTap: () async
+                  {
+                    await Navigator.push(context, MaterialPageRoute(builder: (context)=>IventDetailPage(index: index)));
+                    setState(() {});
+                  },
+                  child: expDataList.card(context, index)
+                );
               }
             ))
           ]

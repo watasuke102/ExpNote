@@ -41,7 +41,8 @@ class _IventDetailPageState extends State<IventDetailPage>
     enteredData.money = expDataList.money(widget.index);
     moneyController   = TextEditingController(text: expDataList.money(widget.index).toString());
     // 詳細
-    descriptionController = TextEditingController(text: expDataList.description(widget.index));
+    enteredData.description = expDataList.description(widget.index);
+    descriptionController   = TextEditingController(text: expDataList.description(widget.index));
   }
 
   Future<void> selectDate(BuildContext context) async

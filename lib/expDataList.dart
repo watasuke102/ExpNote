@@ -11,7 +11,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'pages/iventDetailPage.dart';
 
 //タイトル・日付，変動金額を記録するもの
 class ExpData
@@ -148,12 +147,8 @@ class ExpDataList
 
   Widget card(BuildContext context, int index)
   {
-    return Container( child:Card( child:InkWell
+    return Container( child:Card
     (
-      onTap: ()
-      {
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>IventDetailPage(index: index)));
-      },
       child:Padding
       (
         padding: EdgeInsets.only(left: 8,right: 5),
@@ -184,7 +179,7 @@ class ExpDataList
             )
           ]
         ))
-      ))
+      )
     );
   }
 }
