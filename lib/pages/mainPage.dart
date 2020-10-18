@@ -32,7 +32,8 @@ class _MainPageState extends State<MainPage>
   {
     super.initState();
     _controller = new PageController();
-    setState(() { expDataList = ExpDataList(); });
+    expDataList = ExpDataList();
+    setState(() { expDataList.init(); });
   }
   @override void dispose()
   {
