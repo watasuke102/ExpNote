@@ -8,7 +8,7 @@
  * This software is released under the MIT SUSHI-WARE License.
  */
 import 'package:flutter/material.dart';
-import 'pages/mainPage.dart';
+import 'pages/splashScreen.dart';
 
 const APP_NAME         = 'ExpNote';
 const VERSION          = 'v0.00';
@@ -25,7 +25,7 @@ class MainApp extends StatelessWidget
     (
       title: NAME_AND_VERSION,
       theme: ThemeData(primarySwatch: Colors.lightGreen),
-      home : MainPage(title: APP_NAME)
+      home : SplashScreen()
     );
   }
 }

@@ -43,6 +43,7 @@ class ExpDataList
 {
   int _sumOfMoney     = 0;
   List<ExpData> _data = [];
+  bool initialized    = false;
 
   ExpDataList.data(this._data);
 
@@ -52,7 +53,7 @@ class ExpDataList
   {
     print("[debug] ExpDataList initing...");
     Future future=loadDataToSharedPreference();
-    future.then((value) { for (var i in _data) _sumOfMoney += i.money; });
+    future.then((value) { for (var i in _data) _sumOfMoney += i.money; initialized=true; });
   }
   Future loadDataToSharedPreference() async
   {
