@@ -152,7 +152,7 @@ class _AddIventsPageState extends State<AddIventsPage>
               (
                 decoration: moneyField,
                 keyboardType: TextInputType.number,
-                onChanged: (value) { setState(() { enteredData.money = int.parse(value); }); }
+                onChanged: (value) { setState(() { enteredData.money = int.parse(value)??0; }); }
               ),
 
               // 詳細

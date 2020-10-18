@@ -22,18 +22,24 @@ class ExpData
   String   title       = 'Title';
   String   description = '';
 
+  String dateString(){ return DateFormat('yyyy/MM/dd').format(date); }
+
   ExpData(){}
 
   ExpData.fromJson(Map j)
-      : date = DateFormat('yyyy/MM/dd').parse(j['date']),
-        title = j['title'],
-        money = j['money'];
+      : date        = DateFormat('yyyy/MM/dd').parse(j['date']),
+        createDate  = DateFormat('yyyy/MM/dd  HH:MM').parse(j['createDate']),
+        title       = j['title'],
+        money       = j['money'],
+        description = j['description'];
 
   Map toJson() =>
   {
     'date': DateFormat('yyyy/MM/dd').format(date),
+    'createDate': DateFormat('yyyy/MM/dd  HH:MM').format(createDate),
     'title': title,
-    'money': money
+    'money': money,
+    'description': description
   };
 }
 
@@ -50,6 +56,7 @@ class ExpDataList
   Future init() async
   {
     print("[debug] ExpDataList initing...");
+    _sumOfMoney = 0;
     Future future=loadDataToSharedPreference();
     future.then((value) { for (var i in _data) _sumOfMoney += i.money; initialized=true; });
   }
@@ -72,13 +79,14 @@ class ExpDataList
     _data.clear();
   }
 
-  void add(ExpData d)
+  Future add(ExpData d)
   {
     d.createDate=DateTime.now();
     _data.add(d);
     _sumOfMoney += d.money;
     _data.sort((a, b) => b.date.compareTo(a.date));
-    saveDataToSharedPreference();
+    Future future=saveDataToSharedPreference();
+    return future;
   }
   Future saveDataToSharedPreference() async
   {
@@ -89,14 +97,34 @@ class ExpDataList
     print("\nSave finish!!\n\n");
   }
 
+  Future delete(int index)
+  {
+    _data.removeAt(index);
+    Future future=saveDataToSharedPreference();
+    return future;
+  }
+
+  Future updateData(int index, ExpData data)
+  {
+    _data[index] = data;
+    Future future=saveDataToSharedPreference();
+    return future;
+  }
+
 
   int    sumOfData()  { return _data.length; }
-  String sumOfMoney() { return NumberFormat("#,###")   .format(_sumOfMoney); }
+  String sumOfMoney() { return NumberFormat("#,###").format(_sumOfMoney); }
 
-  String   dateString(int i) { return DateFormat('yyyy/MM/dd').format(_data[i].date); }
+  String   dateString(int i) { return _data[i].dateString(); }
   DateTime       date(int i) { return _data[i].date;  }
   String        title(int i) { return _data[i].title; }
   int           money(int i) { return _data[i].money; }
+
+  String      description(int i) { return _data[i].description;}
+  String createDateString(int i)
+  {
+    return DateFormat('yyyy/MM/dd  HH:MM').format(_data[i].createDate);
+  }
 
   String plusOrMinus(int i)
   {
@@ -124,7 +152,7 @@ class ExpDataList
     (
       onTap: ()
       {
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>IventDetailPage(data: _data[index])));
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>IventDetailPage(index: index)));
       },
       child:Padding
       (
