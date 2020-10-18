@@ -9,10 +9,7 @@
  */
 import 'package:flutter/material.dart';
 import 'pages/splashScreen.dart';
-
-const APP_NAME         = 'ExpNote';
-const VERSION          = 'v0.00';
-const NAME_AND_VERSION = APP_NAME+' - '+VERSION;
+import 'data.dart';
 
 void main() => runApp(MainApp());
 
