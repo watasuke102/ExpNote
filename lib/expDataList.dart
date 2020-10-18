@@ -18,7 +18,14 @@ class ExpData
   DateTime  date = DateTime.now();
   String   title = 'Title';
   int      money = 0;
-  ExpData({this.date,this.title,this.money});
+  ExpData(){}
+  ExpData.init(String t, int m, DateTime d)
+  {
+    title = t;
+    date  = d;
+    money = m;
+  }
+
   ExpData.fromJson(Map j)
       : date = DateFormat('yyyy/MM/dd').parse(j['date']),
         title = j['title'],
