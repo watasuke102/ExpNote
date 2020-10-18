@@ -11,20 +11,18 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'pages/iventDetailPage.dart';
 
 //タイトル・日付，変動金額を記録するもの
 class ExpData
 {
-  DateTime  date = DateTime.now();
-  String   title = 'Title';
-  int      money = 0;
+  DateTime date        = DateTime.now();
+  DateTime createDate  = DateTime.now();
+  int      money       = 0;
+  String   title       = 'Title';
+  String   description = '';
+
   ExpData(){}
-  ExpData.init(String t, int m, DateTime d)
-  {
-    title = t;
-    date  = d;
-    money = m;
-  }
 
   ExpData.fromJson(Map j)
       : date = DateFormat('yyyy/MM/dd').parse(j['date']),
@@ -121,36 +119,43 @@ class ExpDataList
 
   Widget card(BuildContext context, int index)
   {
-    return Container(child:Card(child:Padding
+    return Container( child:Card( child:InkWell
     (
-      padding: EdgeInsets.only(left: 8,right: 5),
-      child: Row
+      onTap: ()
+      {
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>IventDetailPage(data: _data[index])));
+      },
+      child:Padding
       (
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>
-        [
-          Flexible(child: Column(children:<Widget>
+        padding: EdgeInsets.only(left: 8,right: 5),
+        child: Row
+        (
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>
           [
-            Text
-            (
-              title(index),
-              style   : Theme.of(context).textTheme.subtitle1,
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
-            )
-          ])),
-          // 収支額・表示
-          Column
-          (
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: <Widget>
+            Flexible(child: Column(children:<Widget>
             [
-              Text(plusOrMinus(index) + money(index).toString(),style: Theme.of(context).textTheme.headline3),
-              Text(dateString(index), style: Theme.of(context).textTheme.caption)
-            ]
-          )
-        ]
-      )))
+              Text
+              (
+                title(index),
+                style   : Theme.of(context).textTheme.subtitle1,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+              )
+            ])),
+            // 収支額・表示
+            Column
+            (
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>
+              [
+                Text(plusOrMinus(index) + money(index).toString(),style: Theme.of(context).textTheme.headline3),
+                Text(dateString(index), style: Theme.of(context).textTheme.caption)
+              ]
+            )
+          ]
+        ))
+      ))
     );
   }
 }

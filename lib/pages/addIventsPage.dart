@@ -48,7 +48,7 @@ class _AddIventsPageState extends State<AddIventsPage>
     (
       appBar: AppBar
       (
-        title: Text("Add Ivent"),
+        title: Text("イベントの追加"),
         actions:
         [
           IconButton(icon: Icon(Icons.check), onPressed: () => done())
