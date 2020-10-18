@@ -9,21 +9,27 @@
  */
 import 'package:flutter/material.dart';
 import '../expDataList.dart';
+import 'addIventsPage.dart';
 
 // Ivent detail Page
-class IventDetailPage extends StatelessWidget
+class IventDetailPage extends StatefulWidget
 {
   final ExpData data;
   IventDetailPage( {Key key, this.data} ) : super(key: key);
+  @override _IventDetailPageState createState() => _IventDetailPageState();
+}
 
+//IventViewPageState
+class _IventDetailPageState extends State<IventDetailPage>
+{
   @override Widget build(BuildContext context)
   {
-    print(data);
+    print(widget.data);
     return Scaffold
     (
       appBar: AppBar
       (
-        title: Text("イベントの詳細"),
+        title: Text("イベントの詳細・編集"),
       ),
     );
   }
