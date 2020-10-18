@@ -25,8 +25,7 @@ class MainPage extends StatefulWidget
 //MainPageState
 class _MainPageState extends State<MainPage>
 {
-  int _index   = 0;
-
+  int _index = 0;
   PageController _controller;
 
   @override void initState()
@@ -37,23 +36,8 @@ class _MainPageState extends State<MainPage>
   }
   @override void dispose()
   {
-    super.dispose();
     _controller.dispose();
-  }
-
-  void _onPageChanged(int page)
-  {
-    setState( (){this._index = page;} );
-  }
-
-  void _onTapNavigation(int page)
-  {
-    _controller.animateToPage
-    (
-      page,
-      duration: const Duration(microseconds: 500),
-      curve: Curves.bounceOut
-    );
+    super.dispose();
   }
 
   @override Widget build(BuildContext context)
@@ -76,7 +60,10 @@ class _MainPageState extends State<MainPage>
       body: new PageView
       (
         controller   : _controller,
-        onPageChanged: _onPageChanged,
+        onPageChanged:(value)
+        {
+          setState( (){this._index = value;} );
+        },
         children:
         [
           new IventViewPage(),
@@ -86,7 +73,19 @@ class _MainPageState extends State<MainPage>
       bottomNavigationBar: BottomNavigationBar
       (
         currentIndex: _index,
-        onTap: _onTapNavigation,
+        onTap:(value)
+        {
+          setState(()
+          {
+            _index=value;
+            _controller.animateToPage
+            (
+              value,
+              duration: const Duration(microseconds: 500),
+              curve: Curves.bounceOut,
+            );
+          });
+        },
         items:
         [
           BottomNavigationBarItem
