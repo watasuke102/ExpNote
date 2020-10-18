@@ -75,9 +75,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4142136"
-     inkscape:cx="155.51241"
-     inkscape:cy="233.12407"
+     inkscape:zoom="1"
+     inkscape:cx="115.62686"
+     inkscape:cy="238.23704"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      inkscape:document-rotation="0"
@@ -114,48 +114,48 @@
        y="0"
        clip-path="url(#clipPath1034)" />
     <rect
-       style="opacity:0.995;fill:#efdf84;fill-opacity:1;stroke:none;stroke-width:3.58487;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+       style="opacity:0.995;fill:#efdf84;fill-opacity:1;stroke:none;stroke-width:4.39055;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
        id="rect851"
        width="63.5"
-       height="2.6458333"
+       height="3.96875"
        x="27.78125"
        y="15.875" />
     <rect
-       style="opacity:0.995;fill:#efdf84;fill-opacity:1;stroke:none;stroke-width:3.49504;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+       style="opacity:0.995;fill:#efdf84;fill-opacity:1;stroke:none;stroke-width:4.28053;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
        id="rect861"
        width="60.35767"
-       height="2.6458333"
+       height="3.96875"
        x="29.352415"
        y="97.895836" />
     <g
        id="g881"
        transform="matrix(1.0343304,0,0,1,-10.527398,-5.4239603)">
       <rect
-         style="opacity:0.995;fill:#fff7c8;fill-opacity:1;stroke:none;stroke-width:3.21775;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+         style="opacity:0.995;fill:#fff7c8;fill-opacity:1;stroke:none;stroke-width:3.94092;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
          id="rect853"
          width="51.160313"
-         height="2.6458333"
+         height="3.96875"
          x="42.153179"
          y="60.986462" />
       <rect
-         style="opacity:0.995;fill:#fff7c8;fill-opacity:1;stroke:none;stroke-width:3.21775;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+         style="opacity:0.995;fill:#fff7c8;fill-opacity:1;stroke:none;stroke-width:3.94092;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
          id="rect857"
          width="51.160313"
-         height="2.6458333"
+         height="3.96875"
          x="42.153179"
          y="39.819794" />
       <rect
-         style="opacity:0.995;fill:#fff7c8;fill-opacity:1;stroke:none;stroke-width:3.21775;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+         style="opacity:0.995;fill:#fff7c8;fill-opacity:1;stroke:none;stroke-width:3.94092;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
          id="rect859"
          width="51.160313"
-         height="2.6458333"
+         height="3.96875"
          x="42.153179"
          y="84.798958" />
       <rect
-         style="opacity:0.995;fill:#fff7c8;fill-opacity:1;stroke:none;stroke-width:5.73686;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+         style="opacity:0.995;fill:#fff7c8;fill-opacity:1;stroke:none;stroke-width:7.00294;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
          id="rect867"
-         width="2.6458333"
-         height="47.625004"
+         width="3.8370235"
+         height="48.934624"
          x="42.153179"
          y="39.819794" />
     </g>
@@ -178,7 +178,7 @@
        transform="translate(-11.096163)" />
     <g
        id="g922"
-       transform="matrix(0.94723885,0,0,0.94723807,-26.763212,-9.4048154)">
+       transform="matrix(0.98137361,0,0,0.98137399,-31.764026,-15.099925)">
       <circle
          style="opacity:0.988;fill:#fcee4d;fill-opacity:1;stroke:none;stroke-width:4.00799;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;filter:url(#filter911)"
          id="path875"
