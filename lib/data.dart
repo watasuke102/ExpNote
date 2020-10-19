@@ -9,5 +9,5 @@
  */
 
 const APP_NAME         = 'ExpNote';
-const VERSION          = 'v0.00';
+const VERSION          = 'v1.0.0';
 const NAME_AND_VERSION = APP_NAME+' - '+VERSION;
