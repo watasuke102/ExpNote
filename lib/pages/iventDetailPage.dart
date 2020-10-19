@@ -69,12 +69,12 @@ class _IventDetailPageState extends State<IventDetailPage>
       });
     }
     else titleField = InputDecoration(labelText: "タイトル*");
-    if(enteredData.money == 0)
+    if(enteredData.money == null)
     {
       failed=true;
       setState(()
       {
-        moneyField = InputDecoration(labelText: "金額*", errorText: "必須項目です");
+        moneyField = InputDecoration(labelText: "金額*", errorText: "必須項目です（マイナスと整数のみ入力してください）");
       });
     }
     else moneyField = InputDecoration(labelText: "金額*");
@@ -168,7 +168,11 @@ class _IventDetailPageState extends State<IventDetailPage>
                 controller: moneyController,
                 decoration: moneyField,
                 keyboardType: TextInputType.number,
-                onChanged: (value) { setState(() { enteredData.money = int.parse(value); }); }
+                onChanged: (value) { setState(()
+                {
+                  try{ enteredData.money = int.parse(value); }
+                  catch(ex){ enteredData.money=null; }
+                });}
               ),
 
               // 詳細

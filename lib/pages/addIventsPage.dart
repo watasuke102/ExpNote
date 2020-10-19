@@ -31,7 +31,7 @@ class _AddIventsPageState extends State<AddIventsPage>
     super.initState();
     titleField = InputDecoration(labelText: "タイトル*");
     moneyField = InputDecoration(labelText: "金額*");
-    enteredData.title=null;
+    enteredData.title="";
     enteredData.money=null;
   }
 
@@ -50,7 +50,7 @@ class _AddIventsPageState extends State<AddIventsPage>
   void done()
   {
     bool failed=false;
-    if(enteredData.title == null)
+    if(enteredData.title == "")
     {
       failed=true;
       setState(()
@@ -64,7 +64,7 @@ class _AddIventsPageState extends State<AddIventsPage>
       failed=true;
       setState(()
       {
-        moneyField = InputDecoration(labelText: "金額*", errorText: "必須項目です");
+        moneyField = InputDecoration(labelText: "金額*", errorText: "必須項目です（マイナスと整数のみ入力してください）");
       });
     }
     else moneyField = InputDecoration(labelText: "金額*");
@@ -108,7 +108,7 @@ class _AddIventsPageState extends State<AddIventsPage>
           //なにか入力されていたらダイアログ表示
           if
           (
-            enteredData.title       != null ||
+            enteredData.title       != ""   ||
             enteredData.money       != null ||
             enteredData.description != ""
           )
@@ -152,7 +152,11 @@ class _AddIventsPageState extends State<AddIventsPage>
               (
                 decoration: moneyField,
                 keyboardType: TextInputType.number,
-                onChanged: (value) { setState(() { enteredData.money = int.parse(value)??0; }); }
+                onChanged: (value) { setState(()
+                {
+                  try{ enteredData.money = int.parse(value); }
+                  catch(ex){ enteredData.money=null; }
+                });}
               ),
 
               // 詳細
