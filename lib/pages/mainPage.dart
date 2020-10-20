@@ -79,8 +79,8 @@ class _MainPageState extends State<MainPage>
             _controller.animateToPage
             (
               value,
-              duration: const Duration(microseconds: 500),
-              curve: Curves.bounceOut,
+              duration: Duration(milliseconds: 500),
+              curve: Curves.easeOutQuart,
             );
           });
         },
