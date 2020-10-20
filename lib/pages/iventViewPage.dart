@@ -39,9 +39,11 @@ class _IventViewPageState extends State<IventViewPage>
             //Container(child:Center(
             Flexible(child: ListView.builder
             (
-              itemCount: expDataList.sumOfData(),
+              itemCount: expDataList.sumOfData()+1,
               itemBuilder: (context, index)
               {
+                if(index==expDataList.sumOfData())
+                  return Container(height:70);
                 return InkWell
                 (
                   onTap: () async
