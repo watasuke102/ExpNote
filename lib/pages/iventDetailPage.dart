@@ -145,9 +145,9 @@ class _IventDetailPageState extends State<IventDetailPage>
                   Text(fmt.format(enteredData.date), style: Theme.of(context).textTheme.headline5),
                   FlatButton.icon
                   (
-                    color: Colors.lightBlue,
-                    icon: Icon(Icons.calendar_today),
-                    label: Text("変更"),
+                    color: Theme.of(context).buttonColor,
+                    icon:  Icon(Icons.calendar_today,color: Colors.black),
+                    label: Text("変更", style: TextStyle(color: Colors.black)),
                     onPressed: () async => selectDate(context)
                   )
                 ]

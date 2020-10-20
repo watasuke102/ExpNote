@@ -21,7 +21,18 @@ class MainApp extends StatelessWidget
     return MaterialApp
     (
       title: NAME_AND_VERSION,
-      theme: ThemeData(primarySwatch: Colors.lightGreen),
+      theme: ThemeData
+      (
+        brightness: Brightness.dark,
+        primaryColor            : Colors.lightGreen,
+        secondaryHeaderColor    : Colors.lightGreen[50],
+        primaryColorLight       : Colors.lightGreen[100],
+        backgroundColor         : Colors.lightGreen[200],
+        buttonColor             : Colors.lightGreen[300],
+        accentColor             : Colors.lightGreen[500],
+        toggleableActiveColor   : Colors.lightGreen[600],
+        primaryColorDark        : Colors.lightGreen[700],
+      ),
       home : SplashScreen()
     );
   }
