@@ -7,6 +7,7 @@
  * Twitter: @Watasuke102
  * This software is released under the MIT SUSHI-WARE License.
  */
+import 'package:ExpNote/pages/settingsPage.dart';
 import 'package:flutter/material.dart';
 import 'iventViewPage.dart';
 import 'calanderPage.dart';
@@ -49,7 +50,7 @@ class _MainPageState extends State<MainPage>
         [
           IconButton
           (
-            onPressed: null,
+            onPressed:()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>SettingsPage())),
             tooltip: 'Settings',
             icon: Icon(Icons.settings)
           )

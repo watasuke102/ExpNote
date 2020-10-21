@@ -38,6 +38,7 @@ class _SplashScreenState extends State<SplashScreen>
 
   void initData() async
   {
+    settings.init(context);
     expDataList = ExpDataList();
     expDataList.init();
     if(timerFinished)
