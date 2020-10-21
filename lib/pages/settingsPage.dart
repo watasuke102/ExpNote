@@ -100,9 +100,28 @@ class _SettingsPageState extends State<SettingsPage>
                 ),
               ]
             ),
-              onPressed: () {settings.changeTheme(context);},
-              child: Text("change theme")
-            )
+
+            Container(height: 80),
+
+            // バージョン情報
+            Row
+            (
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:
+              [
+                Icon(Icons.build, size: 40),
+                Text("バージョン情報",style: Theme.of(context).textTheme.headline4)
+              ]
+            ),
+            Row
+            (
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:
+              [
+                SizedBox(height: 50,child: SvgPicture.asset('img/logo.svg')),
+                Text(NAME_AND_VERSION),
+              ]
+            ),
 
             //終わり
           ],
