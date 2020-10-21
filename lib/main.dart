@@ -8,6 +8,7 @@
  * This software is released under the MIT SUSHI-WARE License.
  */
 import 'package:flutter/material.dart';
+
 import 'pages/splashScreen.dart';
 import 'data.dart';
 

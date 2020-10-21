@@ -8,6 +8,7 @@
  * This software is released under the MIT SUSHI-WARE License.
  */
 import 'package:flutter/material.dart';
+
 import 'addIventsPage.dart';
 import 'iventDetailPage.dart';
 import '../expDataList.dart';
@@ -49,7 +50,7 @@ class _IventViewPageState extends State<IventViewPage>
                   onTap: () async
                   {
                     await Navigator.push(context, MaterialPageRoute(builder: (context)=>IventDetailPage(index: index)));
-                    setState(() {});
+                    setState(()=>null);
                   },
                   child: expDataList.card(context, index)
                 );
@@ -67,7 +68,7 @@ class _IventViewPageState extends State<IventViewPage>
         onPressed: () async
         {
           await Navigator.push(context, MaterialPageRoute(builder: (context)=>AddIventsPage()));
-          setState(() {});
+          setState(()=>null);
         }
       ),
     );

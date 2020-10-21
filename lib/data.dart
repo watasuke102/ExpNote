@@ -101,7 +101,7 @@ class DynamicThemeState extends State<DynamicTheme>
       toggleableActiveColor : Colors.lightGreen[600],
       primaryColorDark      : Colors.lightGreen[700],
     );
-    setState(() {});
+    setState(()=>null);
   }
 
   @override Widget build(BuildContext context)
