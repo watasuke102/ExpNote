@@ -7,8 +7,9 @@
  * Twitter: @Watasuke102
  * This software is released under the MIT SUSHI-WARE License.
  */
-import 'package:ExpNote/data.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import '../expDataList.dart';
 import '../data.dart';
 
 // Change Settings Page
@@ -32,23 +33,44 @@ class _SettingsPageState extends State<SettingsPage>
     return Scaffold
     (
       appBar: AppBar(title: Text("Settings")),
-      body: Padding
+      body: SingleChildScrollView(child: Padding
       (
         padding: EdgeInsets.all(15),
         child: Column
         (
-          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>
           [
-            Text("${settings.dark}"),
-            FlatButton
+            // テーマ
+            Row
             (
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:
+              [
+                Icon(Icons.palette,size: 40),
+                Text("テーマの変更",style: Theme.of(context).textTheme.headline4)
+              ]
+            ),
+            Row
+            (
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:
+              [
+                Text("ダークテーマを有効にする"),
+                Switch(value: settings.dark, onChanged: (value) =>settings.changeTheme(context)),
+              ]
+            ),
+            Text("${settings.dark}"),
+                FlatButton
+                (
               onPressed: () {settings.changeTheme(context);},
               child: Text("change theme")
             )
+
+            //終わり
           ],
         )
-      )
+      ))
     );
   }
 }
