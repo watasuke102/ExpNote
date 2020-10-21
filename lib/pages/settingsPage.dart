@@ -72,6 +72,84 @@ class _SettingsPageState extends State<SettingsPage>
 
             Container(height: 80),
 
+            // ソート基準
+            Row
+            (
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:
+              [
+                Icon(Icons.sort, size: 40),
+                Text("ソート基準",style: Theme.of(context).textTheme.headline4)
+              ]
+            ),
+            Row
+            (
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:
+              [
+                Flexible(child:RadioListTile
+                (
+                  title: Text("昇順"),
+                  value: "up",
+                  groupValue: settings.upOrDown,
+                  onChanged: (value) => setState((){settings.setUpOrDown(value);})
+                )),
+                Container(width: 50),
+                Flexible(child:RadioListTile
+                (
+                  title: Text("降順"),
+                  value: "down",
+                  groupValue: settings.upOrDown,
+                  onChanged: (value) => setState((){settings.setUpOrDown(value);})
+                )),
+              ]
+            ),
+            Container(height: 30),
+            Row
+            (
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:
+              [
+                Flexible(child:RadioListTile
+                (
+                  title: Text("イベント日付順"),
+                  value: "iventDay",
+                  groupValue: settings.sortCriteria,
+                  onChanged: (value) => setState((){settings.setSortCriteria(value);})
+                )),
+                Flexible(child:RadioListTile
+                (
+                  title: Text("金額順"),
+                  value: "money",
+                  groupValue: settings.sortCriteria,
+                  onChanged: (value) => setState((){settings.setSortCriteria(value);})
+                ))
+              ]
+            ),
+            Row
+            (
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:
+              [
+                Flexible(child:RadioListTile
+                (
+                  title: Text("作成日順"),
+                  value: "createDay",
+                  groupValue: settings.sortCriteria,
+                  onChanged: (value) => setState((){settings.setSortCriteria(value);})
+                )),
+                Flexible(child:RadioListTile
+                (
+                  title: Text("タイトル50音順"),
+                  value: "title",
+                  groupValue: settings.sortCriteria,
+                  onChanged: (value) => setState((){settings.setSortCriteria(value);})
+                ))
+              ]
+            ),
+
+            Container(height: 80),
+
             // データリセット
             Row
             (

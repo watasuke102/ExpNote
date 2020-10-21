@@ -10,6 +10,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'expDataList.dart';
+
 const APP_NAME         = 'ExpNote';
 const VERSION          = 'v1.0.0';
 const NAME_AND_VERSION = APP_NAME+' - '+VERSION;
@@ -17,12 +19,16 @@ const NAME_AND_VERSION = APP_NAME+' - '+VERSION;
 // アプリの設定の読み込み・書き込み関連
 class SettingList
 {
-  bool dark=false;
+  bool   dark=false;
+  String sortCriteria="money";
+  String upOrDown="down";
 
   Future init(BuildContext context) async
   {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    dark = pref.getBool('darkMode');
+    dark         = pref.getBool('darkMode');
+    upOrDown     = pref.getString('upOrDown');
+    sortCriteria = pref.getString('sortCriteria');
     DynamicTheme.of(context).changeTheme(dark);
   }
 
@@ -32,6 +38,22 @@ class SettingList
     SharedPreferences pref = await SharedPreferences.getInstance();
     await pref.setBool('darkMode', dark);
     DynamicTheme.of(context).changeTheme(dark);
+  }
+
+  Future setUpOrDown(String value) async
+  {
+    upOrDown=value;
+    expDataList.sort();
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    await pref.setString('upOrDown', upOrDown);
+  }
+
+  Future setSortCriteria(String value) async
+  {
+    sortCriteria=value;
+    expDataList.sort();
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    await pref.setString('sortCriteria', sortCriteria);
   }
 }
 SettingList settings;

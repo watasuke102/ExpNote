@@ -8,9 +8,12 @@
  * This software is released under the MIT SUSHI-WARE License.
  */
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'data.dart';
 
 //タイトル・日付，変動金額を記録するもの
 class ExpData
@@ -51,7 +54,8 @@ class ExpDataList
   ExpDataList.data(this._data);
 
   ExpDataList(){}
-
+  
+  // ExpDataList全体
   Future init() async
   {
     print("[debug] ExpDataList initing...");
@@ -59,41 +63,36 @@ class ExpDataList
     Future future=loadDataToSharedPreference();
     future.then((value) { for (var i in _data) _sumOfMoney += i.money; initialized=true; });
   }
-  Future loadDataToSharedPreference() async
-  {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    var data = pref.getStringList('data');
-    if (data != null)
-      _data = data.map((f) => ExpData.fromJson(jsonDecode(f))).toList();
-    else {
-      print("[error] Failed data load (data:null)");
-      _data = [];
-    }
-    print("\nLoad finish!!\n\n");
-  }
 
-  void clear()
-  {
-    _sumOfMoney = 0;
-    _data.clear();
-  }
-
+  // _dataの操作
   Future add(ExpData d)
   {
     d.createDate=DateTime.now();
     _data.add(d);
     _sumOfMoney += d.money;
-    _data.sort((a, b) => b.date.compareTo(a.date));
+    sort();
     Future future=saveDataToSharedPreference();
     return future;
   }
-  Future saveDataToSharedPreference() async
+  void sort()
   {
-    var savedData = _data.map((f) => jsonEncode(f.toJson())).toList();
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    await pref.setStringList('data', savedData);
-
-    print("\nSave finish!!\n\n");
+    _data.sort((a,b)
+    {
+      ExpData first,second;
+      if(settings.upOrDown=="up"){ first=a; second=b; }
+      else{ first=b; second=a; }
+      switch(settings.sortCriteria)
+      {
+        case "iventDay":
+          return first.date.compareTo(second.date);
+        case "money":
+          return first.money.compareTo(second.money);
+        case "createDay":
+          return first.createDate.compareTo(second.createDate);
+        case "title":
+          return first.title.compareTo(second.title);
+      }
+    });
   }
 
   Future delete(int index)
@@ -111,6 +110,36 @@ class ExpDataList
   }
 
 
+  // SharedPreferences関連
+  Future saveDataToSharedPreference() async
+  {
+    var savedData = _data.map((f) => jsonEncode(f.toJson())).toList();
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    await pref.setStringList('data', savedData);
+
+    print("\nSave finish!!\n\n");
+  }
+  Future loadDataToSharedPreference() async
+  {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    var data = pref.getStringList('data');
+    if (data != null)
+      _data = data.map((f) => ExpData.fromJson(jsonDecode(f))).toList();
+    else {
+      print("[error] Failed data load (data:null)");
+      _data = [];
+    }
+    print("\nLoad finish!!\n\n");
+  }
+  Future clearAll() async
+  {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    await pref.remove('data');
+    init();
+  }
+
+
+  // 各データを返す関数
   int    sumOfData()  { return _data.length; }
   String sumOfMoney() { return NumberFormat("#,###").format(_sumOfMoney); }
 
@@ -133,6 +162,7 @@ class ExpDataList
   }
 
 
+  //指定された日付のイベントを返す
   List<ExpData> getEventsOfAnyDay(DateTime tmp)
   {
     DateFormat fmt = DateFormat('yyyy/MM/dd');
@@ -145,6 +175,7 @@ class ExpDataList
   }
 
 
+  // カードウィジェット
   Widget card(BuildContext context, int index)
   {
     return Container( child:Card
