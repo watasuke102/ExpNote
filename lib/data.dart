@@ -13,7 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'expDataList.dart';
 
 const APP_NAME         = 'ExpNote';
-const VERSION          = 'v1.0.0';
+const VERSION          = 'v2.0.0';
 const NAME_AND_VERSION = APP_NAME+' - '+VERSION;
 
 // アプリの設定の読み込み・書き込み関連
