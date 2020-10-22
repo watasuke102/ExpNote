@@ -27,9 +27,10 @@ class SettingList
   Future init(BuildContext context) async
   {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    dark         = pref.getBool('darkMode');
-    upOrDown     = pref.getString('upOrDown');
-    sortCriteria = pref.getString('sortCriteria');
+    dark         = pref.getBool('darkMode')       ?? false;
+    tap          = pref.getString('tap')          ?? "single";
+    upOrDown     = pref.getString('upOrDown')     ?? "down";
+    sortCriteria = pref.getString('sortCriteria') ?? "money";
     DynamicTheme.of(context).changeTheme(dark);
   }
 
