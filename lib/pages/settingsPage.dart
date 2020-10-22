@@ -72,6 +72,33 @@ class _SettingsPageState extends State<SettingsPage>
 
             Container(height: 80),
 
+            // イベント詳細ページの開き方
+            Row
+            (
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:
+              [
+                Icon(Icons.list,size: 40),
+                Text("イベント詳細",style: Theme.of(context).textTheme.headline4)
+              ]
+            ),
+            RadioListTile
+            (
+              title: Text("シングルタップで開く"),
+              value: "single",
+              groupValue: settings.tap,
+              onChanged: (value) => setState((){settings.setTap(value);})
+            ),
+            RadioListTile
+            (
+              title: Text("ロングタップで開く"),
+              value: "double",
+              groupValue: settings.tap,
+              onChanged: (value) => setState((){settings.setTap(value);})
+            ),
+
+            Container(height: 80),
+
             // ソート基準
             Row
             (

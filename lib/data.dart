@@ -22,6 +22,7 @@ class SettingList
   bool   dark=false;
   String sortCriteria="money";
   String upOrDown="down";
+  String tap="single";
 
   Future init(BuildContext context) async
   {
@@ -38,6 +39,13 @@ class SettingList
     SharedPreferences pref = await SharedPreferences.getInstance();
     await pref.setBool('darkMode', dark);
     DynamicTheme.of(context).changeTheme(dark);
+  }
+
+  Future setTap(String value) async
+  {
+    tap=value;
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    await pref.setString('tap', tap);
   }
 
   Future setUpOrDown(String value) async

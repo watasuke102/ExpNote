@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'addIventsPage.dart';
 import 'iventDetailPage.dart';
 import '../expDataList.dart';
+import '../data.dart';
 
 class IventViewPage extends StatefulWidget
 {
@@ -23,6 +24,12 @@ class IventViewPage extends StatefulWidget
 //IventViewPageState
 class _IventViewPageState extends State<IventViewPage>
 {
+  Future openIventDetail(int index, String s) async
+  {
+    if(settings.tap != s) return;
+    await Navigator.push(context, MaterialPageRoute(builder: (context)=>IventDetailPage(index: index)));
+    setState(()=>null);
+  }
   @override Widget build(BuildContext context)
   {
     return Scaffold
@@ -47,11 +54,8 @@ class _IventViewPageState extends State<IventViewPage>
                   return Container(height:70);
                 return InkWell
                 (
-                  onTap: () async
-                  {
-                    await Navigator.push(context, MaterialPageRoute(builder: (context)=>IventDetailPage(index: index)));
-                    setState(()=>null);
-                  },
+                  onTap:       ()=>openIventDetail(index, "single"),
+                  onLongPress: ()=>openIventDetail(index, "double"),
                   child: expDataList.card(context, index)
                 );
               }
